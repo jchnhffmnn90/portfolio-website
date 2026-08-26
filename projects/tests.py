@@ -1,8 +1,38 @@
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from unittest.mock import MagicMock, patch
 
+import pytest
+
+from projects.models import Project
 from projects.services.github import GitHubClient, GitHubRepo, fetch_user_repositories
+
+
+@pytest.mark.django_db
+def test_project_creation_and_auto_slug():
+    project = Project.objects.create(
+        name="Awesome Portfolio",
+        github_url="https://github.com/testuser/awesome-portfolio",
+        language="Python",
+        stars_count=10,
+    )
+
+    assert str(project) == "Awesome Portfolio"
+    assert project.slug == "awesome-portfolio"
+    assert project.stars_count == 10
+    assert project.is_visible is True
+    assert project.is_featured is False
+
+
+@pytest.mark.django_db
+def test_project_custom_slug_preserved():
+    project = Project.objects.create(
+        name="Awesome Portfolio",
+        slug="custom-slug",
+        github_url="https://github.com/testuser/awesome-portfolio",
+    )
+
+    assert project.slug == "custom-slug"
 
 
 def test_github_repo_from_dict():
@@ -29,7 +59,7 @@ def test_github_repo_from_dict():
     assert repo.forks_count == 1
     assert repo.is_fork is False
     assert repo.topics == ["django", "python"]
-    assert repo.pushed_at == datetime(2024, 1, 15, 12, 0, 0, tzinfo=timezone.utc)
+    assert repo.pushed_at == datetime(2024, 1, 15, 12, 0, 0, tzinfo=UTC)
 
 
 def test_github_client_filters_forks():
