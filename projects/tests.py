@@ -1,11 +1,15 @@
+import io
 import json
 from datetime import UTC, datetime
 from unittest.mock import MagicMock, patch
 
 import pytest
+from django.core.management import call_command
+from django.core.management.base import CommandError
 
 from projects.models import Project
 from projects.services.github import GitHubClient, GitHubRepo, fetch_user_repositories
+from projects.services.sync import sync_projects_from_github
 
 
 @pytest.mark.django_db
@@ -33,6 +37,95 @@ def test_project_custom_slug_preserved():
     )
 
     assert project.slug == "custom-slug"
+
+
+@pytest.mark.django_db
+def test_sync_projects_from_github_creates_and_updates():
+    fake_repos = [
+        GitHubRepo(
+            name="repo-one",
+            full_name="testuser/repo-one",
+            description="First repo",
+            html_url="https://github.com/testuser/repo-one",
+            homepage="",
+            language="Python",
+            topics=["django"],
+            stars_count=3,
+            forks_count=0,
+            pushed_at=datetime(2024, 1, 1, tzinfo=UTC),
+        ),
+        GitHubRepo(
+            name="repo-two",
+            full_name="testuser/repo-two",
+            description="Second repo",
+            html_url="https://github.com/testuser/repo-two",
+            homepage="https://two.example.com",
+            language="TypeScript",
+            topics=["vue"],
+            stars_count=8,
+            forks_count=2,
+            pushed_at=datetime(2024, 1, 2, tzinfo=UTC),
+        ),
+    ]
+
+    with patch("projects.services.sync.fetch_user_repositories", return_value=fake_repos):
+        result = sync_projects_from_github(username="testuser")
+
+    assert result.total == 2
+    assert result.created == 2
+    assert result.updated == 0
+    assert Project.objects.count() == 2
+
+    # Second sync with updated stars count
+    fake_repos[0].stars_count = 15
+    with patch("projects.services.sync.fetch_user_repositories", return_value=fake_repos):
+        result_update = sync_projects_from_github(username="testuser")
+
+    assert result_update.total == 2
+    assert result_update.created == 0
+    assert result_update.updated == 2
+    assert Project.objects.get(name="repo-one").stars_count == 15
+
+
+@pytest.mark.django_db
+def test_sync_projects_missing_username_raises():
+    with patch("projects.services.sync.settings") as mock_settings:
+        mock_settings.GITHUB_USERNAME = None
+        mock_settings.GITHUB_TOKEN = None
+        with pytest.raises(ValueError, match="GitHub username"):
+            sync_projects_from_github(username=None)
+
+
+@pytest.mark.django_db
+def test_sync_projects_management_command():
+    fake_repos = [
+        GitHubRepo(
+            name="command-repo",
+            full_name="testuser/command-repo",
+            description="Command test repo",
+            html_url="https://github.com/testuser/command-repo",
+            homepage="",
+            language="Python",
+            topics=[],
+            stars_count=1,
+            forks_count=0,
+        )
+    ]
+
+    out = io.StringIO()
+    with patch("projects.services.sync.fetch_user_repositories", return_value=fake_repos):
+        call_command("sync_projects", username="testuser", stdout=out)
+
+    output = out.getvalue()
+    assert "Successfully synced projects" in output
+    assert Project.objects.filter(name="command-repo").exists()
+
+
+@pytest.mark.django_db
+def test_sync_projects_management_command_error():
+    with patch("projects.management.commands.sync_projects.sync_projects_from_github", side_effect=ValueError("Invalid user")):
+        with pytest.raises(CommandError, match="Invalid user"):
+            call_command("sync_projects", username="baduser")
 
 
 def test_github_repo_from_dict():
