@@ -1,4 +1,3 @@
-
 from django.contrib import admin
 
 from .models import Project
@@ -18,4 +17,3 @@ class ProjectAdmin(admin.ModelAdmin):
     list_filter = ("is_featured", "is_visible", "language")
     search_fields = ("name", "description", "language")
     prepopulated_fields = {"slug": ("name",)}
-

@@ -11,4 +11,3 @@ ignore = [
     "E501",    # Line length handled by formatter
     "RUF012",  # Mutable class attributes are standard in Django (models, admin, forms)
 ]
-

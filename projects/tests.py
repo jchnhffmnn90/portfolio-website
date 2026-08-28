@@ -123,7 +123,10 @@ def test_sync_projects_management_command():
 
 @pytest.mark.django_db
 def test_sync_projects_management_command_error():
-    with patch("projects.management.commands.sync_projects.sync_projects_from_github", side_effect=ValueError("Invalid user")):
+    with patch(
+        "projects.management.commands.sync_projects.sync_projects_from_github",
+        side_effect=ValueError("Invalid user"),
+    ):
         with pytest.raises(CommandError, match="Invalid user"):
             call_command("sync_projects", username="baduser")
 

@@ -63,4 +63,3 @@ def sync_projects_from_github(
             logger.debug("Updated existing project: %s", repo.name)
 
     return result
-

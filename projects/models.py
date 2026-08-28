@@ -32,4 +32,3 @@ class Project(models.Model):
         if not self.slug:
             self.slug = str(slugify(self.name))  # type: ignore[assignment]
         super().save(*args, **kwargs)
-
