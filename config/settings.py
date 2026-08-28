@@ -14,7 +14,7 @@ env = environ.Env(
     DEBUG=(bool, False),
     SECRET_KEY=(str, "django-insecure-default-change-me"),
     ALLOWED_HOSTS=(list, ["127.0.0.1", "localhost"]),
-    GITHUB_USERNAME=(str, "jchnhffmnn"),
+    GITHUB_USERNAME=(str, "jchnhffmnn90"),
     GITHUB_TOKEN=(str, ""),
 )
 
