@@ -6,6 +6,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 from django.core.management import call_command
 from django.core.management.base import CommandError
+from django.urls import reverse
 
 from projects.models import Project
 from projects.services.github import GitHubClient, GitHubRepo, fetch_user_repositories
@@ -129,6 +130,59 @@ def test_sync_projects_management_command_error():
     ):
         with pytest.raises(CommandError, match="Invalid user"):
             call_command("sync_projects", username="baduser")
+
+
+@pytest.mark.django_db
+def test_project_list_view_renders(client):
+    Project.objects.create(
+        name="visible-proj",
+        github_url="https://github.com/testuser/visible-proj",
+        is_visible=True,
+    )
+    Project.objects.create(
+        name="hidden-proj",
+        github_url="https://github.com/testuser/hidden-proj",
+        is_visible=False,
+    )
+
+    response = client.get(reverse("projects:list"))
+    assert response.status_code == 200
+    assert len(response.context["projects"]) == 1
+    assert response.context["projects"][0].name == "visible-proj"
+
+
+@pytest.mark.django_db
+def test_project_list_view_search_and_filter(client):
+    Project.objects.create(
+        name="django-starter",
+        description="A template for Django apps",
+        language="Python",
+        topics=["django"],
+        stars_count=5,
+        is_visible=True,
+    )
+    Project.objects.create(
+        name="vue-frontend",
+        description="Frontend components",
+        language="TypeScript",
+        topics=["vue"],
+        stars_count=10,
+        is_visible=True,
+    )
+
+    # Search query
+    res_search = client.get(reverse("projects:list"), {"q": "django"})
+    assert len(res_search.context["projects"]) == 1
+    assert res_search.context["projects"][0].name == "django-starter"
+
+    # Language filter
+    res_lang = client.get(reverse("projects:list"), {"language": "TypeScript"})
+    assert len(res_lang.context["projects"]) == 1
+    assert res_lang.context["projects"][0].name == "vue-frontend"
+
+    # Sort option
+    res_sort = client.get(reverse("projects:list"), {"sort": "stars"})
+    assert res_sort.context["projects"][0].name == "vue-frontend"
 
 
 def test_github_repo_from_dict():

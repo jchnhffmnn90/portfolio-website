@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}Projekte — Jochen Hoffmann{% endblock %}
+
+{% block content %}
+<div class="space-y-10 py-6">
+
+    <!-- Header -->
+    <div class="space-y-3">
+        <div class="inline-flex items-center gap-2 text-xs text-gray-400">
+            <a href="/" class="hover:text-white transition">Home</a>
+            <span>/</span>
+            <span class="text-indigo-400">Projekte</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Open Source & Praxisprojekte</h1>
+        <p class="text-gray-400 text-base max-w-2xl">
+            Eine Übersicht aller synchronisierten Repositories. Nutze die Suche und Filter, um nach Sprachen und Topics zu filtern.
+        </p>
+    </div>
+
+    <!-- Search & Filters Bar -->
+    <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-4 sm:p-6 space-y-4">
+        <form method="GET" action="{% url 'projects:list' %}" class="flex flex-col sm:flex-row gap-3">
+            <div class="relative flex-1">
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ search_query }}"
+                    placeholder="Projekte suchen (Name, Beschreibung, Tags)..."
+                    class="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition"
+                >
+            </div>
+
+            {% if selected_language %}
+                <input type="hidden" name="language" value="{{ selected_language }}">
+            {% endif %}
+            {% if selected_topic %}
+                <input type="hidden" name="topic" value="{{ selected_topic }}">
+            {% endif %}
+
+            <div class="flex items-center gap-3">
+                <select
+                    name="sort"
+                    onchange="this.form.submit()"
+                    class="bg-gray-950 border border-gray-700 rounded-lg px-3 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-indigo-500 transition"
+                >
+                    <option value="stars" {% if selected_sort == 'stars' %}selected{% endif %}>⭐ Meiste Sterne</option>
+                    <option value="recent" {% if selected_sort == 'recent' %}selected{% endif %}>🕒 Zuletzt aktualisiert</option>
+                    <option value="name" {% if selected_sort == 'name' %}selected{% endif %}>🔤 Alphabetisch</option>
+                </select>
+
+                <button
+                    type="submit"
+                    class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-lg transition"
+                >
+                    Suchen
+                </button>
+            </div>
+        </form>
+
+        <!-- Filter Tags (Languages) -->
+        {% if available_languages %}
+            <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-gray-800/80">
+                <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider mr-2">Sprache:</span>
+                <a
+                    href="{% url 'projects:list' %}{% if search_query %}?q={{ search_query }}{% endif %}"
+                    class="text-xs px-3 py-1 rounded-full transition {% if not selected_language %}bg-indigo-600 text-white font-medium{% else %}bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-200{% endif %}"
+                >
+                    Alle
+                </a>
+                {% for lang in available_languages %}
+                    <a
+                        href="{% url 'projects:list' %}?language={{ lang }}{% if search_query %}&q={{ search_query }}{% endif %}{% if selected_sort %}&sort={{ selected_sort }}{% endif %}"
+                        class="text-xs px-3 py-1 rounded-full transition {% if selected_language == lang %}bg-indigo-600 text-white font-medium{% else %}bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-200{% endif %}"
+                    >
+                        {{ lang }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Active Filter Reset -->
+        {% if search_query or selected_language or selected_topic %}
+            <div class="flex items-center justify-between text-xs pt-1 text-gray-400">
+                <span>
+                    Aktive Filter:
+                    {% if search_query %}<span class="text-white font-mono">Suche: "{{ search_query }}"</span>{% endif %}
+                    {% if selected_language %}<span class="text-white ml-2">Sprache: {{ selected_language }}</span>{% endif %}
+                    {% if selected_topic %}<span class="text-white ml-2">Topic: #{{ selected_topic }}</span>{% endif %}
+                </span>
+                <a href="{% url 'projects:list' %}" class="text-rose-400 hover:text-rose-300 underline">
+                    Filter zurücksetzen
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Projects Grid -->
+    {% if projects %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for project in projects %}
+                <div class="bg-gray-900/70 border border-gray-800 rounded-xl p-6 flex flex-col justify-between hover:border-gray-700 hover:shadow-lg transition group">
+                    <div class="space-y-4">
+                        <div class="flex items-start justify-between gap-2">
+                            <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">
+                                {{ project.name }}
+                            </h3>
+                            {% if project.language %}
+                                <span class="text-xs px-2.5 py-0.5 rounded-full bg-gray-800 text-gray-300 border border-gray-700 font-mono shrink-0">
+                                    {{ project.language }}
+                                </span>
+                            {% endif %}
+                        </div>
+
+                        <p class="text-gray-400 text-sm line-clamp-3 leading-relaxed">
+                            {{ project.description|default:"Keine Beschreibung verfügbar." }}
+                        </p>
+
+                        {% if project.topics %}
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                {% for topic in project.topics %}
+                                    <a
+                                        href="{% url 'projects:list' %}?topic={{ topic }}"
+                                        class="text-xs px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 border border-indigo-500/20 font-mono transition"
+                                    >
+                                        #{{ topic }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-400">
+                        <div class="flex items-center gap-3">
+                            <span class="flex items-center gap-1" title="Stars">
+                                ⭐ {{ project.stars_count }}
+                            </span>
+                            <span class="flex items-center gap-1" title="Forks">
+                                🍴 {{ project.forks_count }}
+                            </span>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            {% if project.homepage_url %}
+                                <a href="{{ project.homepage_url }}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">
+                                    Live Demo ↗
+                                </a>
+                            {% endif %}
+                            <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition font-medium">
+                                GitHub ↗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+            <div class="flex items-center justify-center gap-2 pt-6">
+                {% if page_obj.has_previous %}
+                    <a
+                        href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if selected_language %}&language={{ selected_language }}{% endif %}{% if selected_topic %}&topic={{ selected_topic }}{% endif %}{% if selected_sort %}&sort={{ selected_sort }}{% endif %}"
+                        class="px-4 py-2 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-800 text-sm text-gray-300 transition"
+                    >
+                        &larr; Zurück
+                    </a>
+                {% endif %}
+
+                <span class="px-4 py-2 text-sm text-gray-400">
+                    Seite {{ page_obj.number }} von {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a
+                        href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if selected_language %}&language={{ selected_language }}{% endif %}{% if selected_topic %}&topic={{ selected_topic }}{% endif %}{% if selected_sort %}&sort={{ selected_sort }}{% endif %}"
+                        class="px-4 py-2 rounded-lg bg-gray-900 border border-gray-800 hover:bg-gray-800 text-sm text-gray-300 transition"
+                    >
+                        Weiter &rarr;
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+
+    {% else %}
+        <div class="bg-gray-900/40 border border-dashed border-gray-800 rounded-xl p-12 text-center space-y-3">
+            <p class="text-gray-300 font-semibold">Keine passenden Projekte gefunden.</p>
+            <p class="text-sm text-gray-400">Passe deine Suchbegriffe oder Filter an.</p>
+            <div class="pt-2">
+                <a href="{% url 'projects:list' %}" class="inline-flex px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium rounded-lg transition">
+                    Alle Filter zurücksetzen
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}
