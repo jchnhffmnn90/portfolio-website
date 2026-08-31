@@ -185,6 +185,36 @@ def test_project_list_view_search_and_filter(client):
     assert res_sort.context["projects"][0].name == "vue-frontend"
 
 
+@pytest.mark.django_db
+def test_project_detail_view_success(client):
+    project = Project.objects.create(
+        name="detail-demo",
+        description="Detailed description here",
+        github_url="https://github.com/testuser/detail-demo",
+        language="Python",
+        topics=["django", "web"],
+        stars_count=12,
+        is_visible=True,
+    )
+
+    response = client.get(reverse("projects:detail", kwargs={"slug": project.slug}))
+    assert response.status_code == 200
+    assert "projects/project_detail.html" in [t.name for t in response.templates]
+    assert response.context["project"].name == "detail-demo"
+
+
+@pytest.mark.django_db
+def test_project_detail_view_hidden_returns_404(client):
+    project = Project.objects.create(
+        name="hidden-detail-demo",
+        github_url="https://github.com/testuser/hidden-detail-demo",
+        is_visible=False,
+    )
+
+    response = client.get(reverse("projects:detail", kwargs={"slug": project.slug}))
+    assert response.status_code == 404
+
+
 def test_github_repo_from_dict():
     sample_data = {
         "name": "my-cool-project",
