@@ -1,7 +1,7 @@
 from typing import Any
 
 from django.db.models import Q, QuerySet
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 
 from projects.models import Project
 
@@ -65,3 +65,14 @@ class ProjectListView(ListView):
         context["selected_sort"] = self.request.GET.get("sort", "stars").strip()
         context["search_query"] = self.request.GET.get("q", "").strip()
         return context
+
+
+class ProjectDetailView(DetailView):
+    model = Project
+    template_name = "projects/project_detail.html"
+    slug_field = "slug"
+    slug_url_kwarg = "slug"
+    context_object_name = "project"
+
+    def get_queryset(self) -> QuerySet[Project]:
+        return Project.objects.filter(is_visible=True)
