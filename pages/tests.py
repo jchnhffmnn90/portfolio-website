@@ -1,6 +1,8 @@
 import pytest
+from django.contrib.messages import get_messages
 from django.urls import reverse
 
+from pages.models import ContactMessage
 from projects.models import Project
 
 
@@ -54,3 +56,75 @@ def test_home_page_fallback_top_starred(client):
     assert response.status_code == 200
     assert len(response.context["featured_projects"]) == 2
     assert response.context["featured_projects"][0].name == "repo-star-10"
+
+
+@pytest.mark.django_db
+def test_contact_page_get(client):
+    response = client.get(reverse("pages:contact"))
+    assert response.status_code == 200
+    assert "pages/contact.html" in [t.name for t in response.templates]
+    assert "form" in response.context
+
+
+@pytest.mark.django_db
+def test_contact_page_post_success(client):
+    data = {
+        "name": "Max Mustermann",
+        "email": "max@example.com",
+        "subject": "Projektanfrage Django",
+        "message": "Hallo, ich würde gerne ein Projekt anfragen.",
+        "honeypot": "",
+    }
+    response = client.post(reverse("pages:contact"), data=data, follow=True)
+    assert response.status_code == 200
+    assert response.redirect_chain == [(reverse("pages:contact"), 302)]
+
+    # Verify message in database
+    message = ContactMessage.objects.first()
+    assert message is not None
+    assert message.name == "Max Mustermann"
+    assert message.email == "max@example.com"
+    assert message.subject == "Projektanfrage Django"
+    assert message.message == "Hallo, ich würde gerne ein Projekt anfragen."
+    assert not message.is_read
+
+    # Verify flash message
+    messages = list(get_messages(response.wsgi_request))
+    assert len(messages) == 1
+    assert "erfolgreich übermittelt" in str(messages[0])
+
+
+@pytest.mark.django_db
+def test_contact_page_post_invalid(client):
+    data = {
+        "name": "",
+        "email": "invalid-email",
+        "subject": "",
+        "message": "",
+        "honeypot": "",
+    }
+    response = client.post(reverse("pages:contact"), data=data)
+    assert response.status_code == 200
+    assert ContactMessage.objects.count() == 0
+    form = response.context["form"]
+    assert not form.is_valid()
+    assert "name" in form.errors
+    assert "email" in form.errors
+    assert "message" in form.errors
+
+
+@pytest.mark.django_db
+def test_contact_page_honeypot_spam_rejection(client):
+    data = {
+        "name": "Spam Bot",
+        "email": "bot@spam.com",
+        "subject": "Buy crypto",
+        "message": "Spam message here",
+        "honeypot": "I am a bot",
+    }
+    response = client.post(reverse("pages:contact"), data=data)
+    assert response.status_code == 200
+    assert ContactMessage.objects.count() == 0
+    form = response.context["form"]
+    assert not form.is_valid()
+    assert "honeypot" in form.errors
