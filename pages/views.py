@@ -3,6 +3,7 @@ from typing import Any
 from django.contrib import messages
 from django.db.models import QuerySet
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import FormView, TemplateView
 
 from pages.forms import ContactForm
@@ -35,6 +36,9 @@ class ContactView(FormView):
         form.save()
         messages.success(
             self.request,
-            "Vielen Dank! Deine Nachricht wurde erfolgreich übermittelt. Ich melde mich in Kürze bei dir.",
+            _(
+                "Vielen Dank! Deine Nachricht wurde erfolgreich übermittelt. "
+                "Ich melde mich in Kürze bei dir."
+            ),
         )
         return super().form_valid(form)

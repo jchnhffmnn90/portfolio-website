@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}{{ project.name }} — Jochen Hoffmann{% endblock %}
 
@@ -8,14 +9,14 @@
     <!-- Breadcrumb & Back Link -->
     <div class="flex items-center justify-between text-xs text-gray-400">
         <div class="inline-flex items-center gap-2">
-            <a href="/" class="hover:text-white transition">Home</a>
+            <a href="{% url 'pages:home' %}" class="hover:text-white transition">Home</a>
             <span>/</span>
-            <a href="{% url 'projects:list' %}" class="hover:text-white transition">Projekte</a>
+            <a href="{% url 'projects:list' %}" class="hover:text-white transition">{% trans "Projekte" %}</a>
             <span>/</span>
             <span class="text-indigo-400 font-mono">{{ project.slug }}</span>
         </div>
         <a href="{% url 'projects:list' %}" class="hover:text-white transition flex items-center gap-1">
-            &larr; Zurück zur Übersicht
+            &larr; {% trans "Zurück zur Übersicht" %}
         </a>
     </div>
 
@@ -51,7 +52,7 @@
                         rel="noopener noreferrer"
                         class="px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium shadow-lg shadow-indigo-500/20 transition flex items-center gap-2"
                     >
-                        Live Demo ↗
+                        {% trans "Live Demo" %} ↗
                     </a>
                 {% endif %}
                 <a
@@ -70,16 +71,16 @@
 
         <!-- Description -->
         <div class="space-y-3">
-            <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Beschreibung</h2>
+            <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">{% trans "Beschreibung" %}</h2>
             <p class="text-gray-200 text-base sm:text-lg leading-relaxed whitespace-pre-line">
-                {{ project.description|default:"Keine nähere Beschreibung angegeben." }}
+                {{ project.description|default:_("Keine nähere Beschreibung angegeben.") }}
             </p>
         </div>
 
         <!-- Topics -->
         {% if project.topics %}
             <div class="space-y-3">
-                <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Themen & Tags</h2>
+                <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">{% trans "Themen & Tags" %}</h2>
                 <div class="flex flex-wrap gap-2">
                     {% for topic in project.topics %}
                         <a
@@ -96,15 +97,15 @@
         <!-- Metrics & Meta Information -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-gray-800">
             <div class="bg-gray-950/60 p-4 rounded-xl border border-gray-800/80">
-                <span class="text-xs text-gray-400 block">Sterne</span>
+                <span class="text-xs text-gray-400 block">{% trans "Sterne" %}</span>
                 <span class="text-xl font-bold text-white mt-1 block">⭐ {{ project.stars_count }}</span>
             </div>
             <div class="bg-gray-950/60 p-4 rounded-xl border border-gray-800/80">
-                <span class="text-xs text-gray-400 block">Forks</span>
+                <span class="text-xs text-gray-400 block">{% trans "Forks" %}</span>
                 <span class="text-xl font-bold text-white mt-1 block">🍴 {{ project.forks_count }}</span>
             </div>
             <div class="bg-gray-950/60 p-4 rounded-xl border border-gray-800/80">
-                <span class="text-xs text-gray-400 block">Letzter Push</span>
+                <span class="text-xs text-gray-400 block">{% trans "Letzter Push" %}</span>
                 <span class="text-sm font-medium text-gray-200 mt-1 block">
                     {% if project.pushed_at %}
                         {{ project.pushed_at|date:"d.m.Y" }}
@@ -114,9 +115,9 @@
                 </span>
             </div>
             <div class="bg-gray-950/60 p-4 rounded-xl border border-gray-800/80">
-                <span class="text-xs text-gray-400 block">Status</span>
+                <span class="text-xs text-gray-400 block">{% trans "Status" %}</span>
                 <span class="text-sm font-medium text-emerald-400 mt-1 block">
-                    Aktiv
+                    {% trans "Aktiv" %}
                 </span>
             </div>
         </div>

@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="de">
+{% load i18n %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +9,48 @@
 </head>
 <body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col font-sans">
     <header class="border-b border-gray-800 bg-gray-900/50 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="/" class="text-xl font-bold text-white hover:text-indigo-400 transition">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
+            <a href="{% url 'pages:home' %}" class="text-xl font-bold text-white hover:text-indigo-400 transition">
                 Jochen Hoffmann
             </a>
-            <nav class="flex items-center space-x-6">
-                <a href="/projects/" class="hover:text-indigo-400 text-sm font-medium transition">Projekte</a>
-                <a href="{% url 'pages:contact' %}" class="hover:text-indigo-400 text-sm font-medium transition">Kontakt</a>
-                <a href="https://github.com/jchnhffmnn90" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-400 text-sm font-medium transition">GitHub</a>
-            </nav>
+            <div class="flex items-center space-x-4 sm:space-x-6">
+                <nav class="hidden md:flex items-center space-x-5 text-sm font-medium">
+                    <a href="{% url 'pages:home' %}#experience" class="text-gray-300 hover:text-indigo-400 transition">{% trans "Erfahrung" %}</a>
+                    <a href="{% url 'pages:home' %}#skills" class="text-gray-300 hover:text-indigo-400 transition">{% trans "Kenntnisse" %}</a>
+                    <a href="{% url 'pages:home' %}#education" class="text-gray-300 hover:text-indigo-400 transition">{% trans "Ausbildung" %}</a>
+                    <a href="{% url 'projects:list' %}" class="text-gray-300 hover:text-indigo-400 transition">{% trans "Projekte" %}</a>
+                    <a href="{% url 'pages:contact' %}" class="text-gray-300 hover:text-indigo-400 transition">{% trans "Kontakt" %}</a>
+                    <a href="https://github.com/jchnhffmnn90" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-indigo-400 transition">GitHub</a>
+                </nav>
+                <nav class="flex md:hidden items-center space-x-3 text-xs font-medium">
+                    <a href="{% url 'projects:list' %}" class="text-gray-300 hover:text-indigo-400 transition">{% trans "Projekte" %}</a>
+                    <a href="{% url 'pages:contact' %}" class="text-gray-300 hover:text-indigo-400 transition">{% trans "Kontakt" %}</a>
+                </nav>
+
+                <!-- Language Switcher -->
+                <form action="{% url 'set_language' %}" method="post" class="inline-flex items-center bg-gray-900 border border-gray-800 rounded-lg p-0.5 text-xs font-mono">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                    <button
+                        type="submit"
+                        name="language"
+                        value="de"
+                        class="px-2 py-1 rounded transition {% if LANGUAGE_CODE == 'de' %}bg-indigo-600 text-white font-semibold shadow-sm{% else %}text-gray-400 hover:text-gray-200{% endif %}"
+                        title="Deutsch"
+                    >
+                        DE
+                    </button>
+                    <button
+                        type="submit"
+                        name="language"
+                        value="en"
+                        class="px-2 py-1 rounded transition {% if LANGUAGE_CODE == 'en' %}bg-indigo-600 text-white font-semibold shadow-sm{% else %}text-gray-400 hover:text-gray-200{% endif %}"
+                        title="English"
+                    >
+                        EN
+                    </button>
+                </form>
+            </div>
         </div>
     </header>
 
@@ -27,7 +60,7 @@
 
     <footer class="border-t border-gray-800 py-6 text-center text-sm text-gray-500">
         <div class="max-w-6xl mx-auto px-4">
-            &copy; {% now "Y" %} Jochen Hoffmann. Built with Django & Tailwind CSS.
+            &copy; {% now "Y" %} Jochen Hoffmann. {% trans "Entwickelt mit Django & Tailwind CSS." %}
         </div>
     </footer>
     {% block extra_js %}{% endblock %}

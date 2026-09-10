@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from pages.models import ContactMessage
 
@@ -16,7 +17,7 @@ class ContactForm(forms.ModelForm):
         widgets = {
             "name": forms.TextInput(
                 attrs={
-                    "placeholder": "Dein Name oder Firma",
+                    "placeholder": _("Dein Name oder Firma"),
                     "class": (
                         "w-full bg-gray-950 border border-gray-800 rounded-lg px-4 py-3 "
                         "text-sm text-gray-100 placeholder-gray-500 focus:outline-none "
@@ -27,7 +28,7 @@ class ContactForm(forms.ModelForm):
             ),
             "email": forms.EmailInput(
                 attrs={
-                    "placeholder": "deine.email@beispiel.de",
+                    "placeholder": _("deine.email@beispiel.de"),
                     "class": (
                         "w-full bg-gray-950 border border-gray-800 rounded-lg px-4 py-3 "
                         "text-sm text-gray-100 placeholder-gray-500 focus:outline-none "
@@ -38,7 +39,7 @@ class ContactForm(forms.ModelForm):
             ),
             "subject": forms.TextInput(
                 attrs={
-                    "placeholder": "Betreff oder Projektidee",
+                    "placeholder": _("Betreff oder Projektidee"),
                     "class": (
                         "w-full bg-gray-950 border border-gray-800 rounded-lg px-4 py-3 "
                         "text-sm text-gray-100 placeholder-gray-500 focus:outline-none "
@@ -49,7 +50,9 @@ class ContactForm(forms.ModelForm):
             "message": forms.Textarea(
                 attrs={
                     "rows": 5,
-                    "placeholder": "Erzähle kurz von deinem Vorhaben, deinen Fragen oder wie ich helfen kann...",
+                    "placeholder": _(
+                        "Erzähle kurz von deinem Vorhaben, deinen Fragen oder wie ich helfen kann..."
+                    ),
                     "class": (
                         "w-full bg-gray-950 border border-gray-800 rounded-lg px-4 py-3 "
                         "text-sm text-gray-100 placeholder-gray-500 focus:outline-none "
@@ -63,5 +66,5 @@ class ContactForm(forms.ModelForm):
     def clean_honeypot(self) -> str:
         honeypot = self.cleaned_data.get("honeypot")
         if honeypot:
-            raise forms.ValidationError("Spam detected.")
+            raise forms.ValidationError(_("Spam erkannt."))
         return honeypot or ""

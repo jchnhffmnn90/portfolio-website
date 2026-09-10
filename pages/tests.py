@@ -11,6 +11,14 @@ def test_home_page_status_code_and_template(client):
     response = client.get(reverse("pages:home"))
     assert response.status_code == 200
     assert "pages/home.html" in [t.name for t in response.templates]
+    content = response.content.decode("utf-8")
+    assert "Enterprise Application Integration Specialist" in content
+    assert "Softwareentwickler ERP-Systeme" in content
+    assert "Weiterbildung IT Administration & Automation" in content
+    assert "Fachinformatiker Anwendungsentwicklung" in content
+    assert "Bachelor Wirtschaftsinformatik" in content
+    assert "IT-Systemelektroniker" in content
+    assert "Ulm, Deutschland" in content
 
 
 @pytest.mark.django_db
@@ -128,3 +136,33 @@ def test_contact_page_honeypot_spam_rejection(client):
     form = response.context["form"]
     assert not form.is_valid()
     assert "honeypot" in form.errors
+
+
+@pytest.mark.django_db
+def test_i18n_language_switching(client):
+    # Default (German)
+    res_de = client.get("/")
+    assert res_de.status_code == 200
+    assert "Projekte" in res_de.content.decode("utf-8")
+    assert "Kontakt" in res_de.content.decode("utf-8")
+
+    # English URL prefix (/en/)
+    res_en = client.get("/en/")
+    assert res_en.status_code == 200
+    assert "Projects" in res_en.content.decode("utf-8")
+    assert "Contact" in res_en.content.decode("utf-8")
+    assert "Backend Development, System Integration & IT Automation." in res_en.content.decode(
+        "utf-8"
+    )
+    assert "Professional Training: IT Administration & Automation" in res_en.content.decode("utf-8")
+
+
+@pytest.mark.django_db
+def test_i18n_set_language_view(client):
+    post_res = client.post(
+        reverse("set_language"),
+        data={"language": "en", "next": "/"},
+    )
+    assert post_res.status_code == 302
+    assert "django_language" in client.cookies
+    assert client.cookies["django_language"].value == "en"
