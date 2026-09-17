@@ -407,3 +407,93 @@
 
 </div>
 {% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Hero Section Animations
+        const tl = gsap.timeline();
+
+        tl.from("h1", {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        })
+        .from("h1 + p", {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power3.out"
+        }, "-=0.6")
+        .from("section:first-of-type .flex a", {
+            y: 20,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power2.out"
+        }, "-=0.4")
+        .from("section:first-of-type > div:last-child", {
+            x: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        }, "-=0.8");
+
+        // Experience Timeline
+        gsap.utils.toArray('#experience .relative.group').forEach((item, i) => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%",
+                },
+                x: -50,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            });
+        });
+
+        // Skills Cards
+        gsap.from('#skills .grid > div', {
+            scrollTrigger: {
+                trigger: '#skills .grid',
+                start: "top 80%",
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out"
+        });
+
+        // Education Cards
+        gsap.from('#education .grid > div', {
+            scrollTrigger: {
+                trigger: '#education .grid',
+                start: "top 80%",
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out"
+        });
+
+        // Project Cards
+        if (document.querySelector('#featured-projects .grid')) {
+            gsap.from('#featured-projects .grid > div', {
+                scrollTrigger: {
+                    trigger: '#featured-projects .grid',
+                    start: "top 80%",
+                },
+                scale: 0.9,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "power3.out"
+            });
+        }
+    });
+</script>
+{% endblock %}
