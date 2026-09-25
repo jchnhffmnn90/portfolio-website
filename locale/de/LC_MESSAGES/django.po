@@ -1,0 +1,603 @@
+# German translations for portfolio website.
+# Copyright (C) 2026 Jochen Hoffmann
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-10 08:45+0000\n"
+"PO-Revision-Date: 2026-09-10 08:50+0000\n"
+"Last-Translator: Jochen Hoffmann <jchnhffmnn90@gmail.com>\n"
+"Language-Team: German <de@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: config/settings.py:111
+msgid "German"
+msgstr "Deutsch"
+
+#: config/settings.py:112
+msgid "English"
+msgstr "Englisch"
+
+#: pages/forms.py:20
+msgid "Dein Name oder Firma"
+msgstr "Dein Name oder Firma"
+
+#: pages/forms.py:31
+msgid "deine.email@beispiel.de"
+msgstr "deine.email@beispiel.de"
+
+#: pages/forms.py:42
+msgid "Betreff oder Projektidee"
+msgstr "Betreff oder Projektidee"
+
+#: pages/forms.py:54
+msgid ""
+"Erzähle kurz von deinem Vorhaben, deinen Fragen oder wie ich helfen kann..."
+msgstr ""
+"Erzähle kurz von deinem Vorhaben, deinen Fragen oder wie ich helfen kann..."
+
+#: pages/forms.py:69
+msgid "Spam erkannt."
+msgstr "Spam erkannt."
+
+#: pages/views.py:40
+msgid ""
+"Vielen Dank! Deine Nachricht wurde erfolgreich übermittelt. Ich melde mich "
+"in Kürze bei dir."
+msgstr ""
+"Vielen Dank! Deine Nachricht wurde erfolgreich übermittelt. Ich melde mich "
+"in Kürze bei dir."
+
+#: templates/base.html:18
+msgid "Erfahrung"
+msgstr "Erfahrung"
+
+#: templates/base.html:19
+msgid "Kenntnisse"
+msgstr "Kenntnisse"
+
+#: templates/base.html:20
+msgid "Ausbildung"
+msgstr "Ausbildung"
+
+#: templates/base.html:21 templates/base.html:26 templates/pages/home.html:57
+#: templates/projects/project_detail.html:14
+#: templates/projects/project_list.html:4
+#: templates/projects/project_list.html:14
+msgid "Projekte"
+msgstr "Projekte"
+
+#: templates/base.html:22 templates/base.html:27 templates/pages/contact.html:4
+#: templates/pages/contact.html:14
+msgid "Kontakt"
+msgstr "Kontakt"
+
+#: templates/base.html:63
+msgid "Entwickelt mit Django & Tailwind CSS."
+msgstr "Entwickelt mit Django & Tailwind CSS."
+
+#: templates/pages/contact.html:16
+msgid "Kontakt & Anfragen"
+msgstr "Kontakt & Anfragen"
+
+#: templates/pages/contact.html:18
+msgid ""
+"Du hast ein spannendes Projekt, eine Frage zu meinem Tech-Stack oder "
+"möchtest dich einfach vernetzen? Schreib mir direkt eine Nachricht."
+msgstr ""
+"Du hast ein spannendes Projekt, eine Frage zu meinem Tech-Stack oder "
+"möchtest dich einfach vernetzen? Schreib mir direkt eine Nachricht."
+
+#: templates/pages/contact.html:49
+msgid "Offen für Anfragen & Kooperationen"
+msgstr "Offen für Anfragen & Kooperationen"
+
+#: templates/pages/contact.html:51
+msgid "Lass uns sprechen"
+msgstr "Lass uns sprechen"
+
+#: templates/pages/contact.html:53
+msgid "Ich antworte in der Regel innerhalb von 24–48 Stunden."
+msgstr "Ich antworte in der Regel innerhalb von 24–48 Stunden."
+
+#: templates/pages/contact.html:67
+msgid "Standort"
+msgstr "Standort"
+
+#: templates/pages/contact.html:68 templates/pages/home.html:51
+msgid "Ulm, Deutschland"
+msgstr "Ulm, Deutschland"
+
+#: templates/pages/contact.html:91
+msgid "Themen & Schwerpunkte"
+msgstr "Themen & Schwerpunkte"
+
+#: templates/pages/contact.html:103
+msgid "Nachricht senden"
+msgstr "Nachricht senden"
+
+#: templates/pages/contact.html:104
+msgid "Fülle die Felder aus und ich melde mich zeitnah bei dir."
+msgstr "Fülle die Felder aus und ich melde mich zeitnah bei dir."
+
+#: templates/pages/contact.html:122
+msgid "Name"
+msgstr "Name"
+
+#: templates/pages/contact.html:132
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: templates/pages/contact.html:144
+msgid "Betreff"
+msgstr "Betreff"
+
+#: templates/pages/contact.html:144
+msgid "optional"
+msgstr "optional"
+
+#: templates/pages/contact.html:155
+msgid "Nachricht"
+msgstr "Nachricht"
+
+#: templates/pages/contact.html:171
+msgid "Nachricht absenden"
+msgstr "Nachricht absenden"
+
+#: templates/pages/home.html:14
+msgid "Software Developer & EAI Specialist"
+msgstr "Software Developer & EAI Specialist"
+
+#: templates/pages/home.html:18
+msgid "Backend-Entwicklung, System-Integration & IT-Automatisierung."
+msgstr "Backend-Entwicklung, System-Integration & IT-Automatisierung."
+
+#: templates/pages/home.html:22
+msgid ""
+"Hi, ich bin <span class=\"text-white font-semibold\">Jochen</span>. "
+"Softwareentwickler mit fundierter Praxis in modernem Python, Enterprise "
+"Application Integration (EAI), ERP-Systemen (Odoo) und zeitgemäßer IT- & "
+"Cloud-Automatisierung."
+msgstr ""
+"Hi, ich bin <span class=\"text-white font-semibold\">Jochen</span>. "
+"Softwareentwickler mit fundierter Praxis in modernem Python, Enterprise "
+"Application Integration (EAI), ERP-Systemen (Odoo) und zeitgemäßer IT- & "
+"Cloud-Automatisierung."
+
+#: templates/pages/home.html:29
+msgid "Werdegang ansehen"
+msgstr "Werdegang ansehen"
+
+#: templates/pages/home.html:32
+msgid "Skills & Tech Stack"
+msgstr "Skills & Tech Stack"
+
+#: templates/pages/home.html:61
+msgid "Fokus"
+msgstr "Fokus"
+
+#: templates/pages/home.html:72
+msgid "Erfahrung & Weiterbildung"
+msgstr "Erfahrung & Weiterbildung"
+
+#: templates/pages/home.html:74
+msgid "Beruflicher Werdegang & Qualifikation"
+msgstr "Beruflicher Werdegang & Qualifikation"
+
+#: templates/pages/home.html:75
+msgid ""
+"Stationen in Enterprise Integration, ERP-Entwicklung und moderner IT-"
+"Automatisierung."
+msgstr ""
+"Stationen in Enterprise Integration, ERP-Entwicklung und moderner IT-"
+"Automatisierung."
+
+#: templates/pages/home.html:91
+msgid "Weiterbildung IT Administration & Automation"
+msgstr "Weiterbildung IT Administration & Automation"
+
+#: templates/pages/home.html:92
+msgid "ZFU-geprüft (850 Unterrichtseinheiten)"
+msgstr "ZFU-geprüft (850 Unterrichtseinheiten)"
+
+#: templates/pages/home.html:95
+msgid "Zertifizierung & Spezialisierung"
+msgstr "Zertifizierung & Spezialisierung"
+
+#: templates/pages/home.html:100
+msgid "System- & Prozessautomatisierung:"
+msgstr "System- & Prozessautomatisierung:"
+
+#: templates/pages/home.html:100
+msgid ""
+"Skriptsprachen & fortgeschrittene Skript-Techniken, Effizienzsteigerung in "
+"Betriebsabläufen, Fehlerbehandlung und Sicherheitsaspekte."
+msgstr ""
+"Skriptsprachen & fortgeschrittene Skript-Techniken, Effizienzsteigerung in "
+"Betriebsabläufen, Fehlerbehandlung und Sicherheitsaspekte."
+
+#: templates/pages/home.html:101
+msgid "Netzwerkautomatisierung & Tools:"
+msgstr "Netzwerkautomatisierung & Tools:"
+
+#: templates/pages/home.html:101
+msgid ""
+"Automatisierung lokaler und netzwerkübergreifender Aufgaben, "
+"Versionskontrolle, CI/CD-Pipelines sowie Überwachung & Metriken."
+msgstr ""
+"Automatisierung lokaler und netzwerkübergreifender Aufgaben, "
+"Versionskontrolle, CI/CD-Pipelines sowie Überwachung & Metriken."
+
+#: templates/pages/home.html:102
+msgid "Cloud & modernes Deployment:"
+msgstr "Cloud & modernes Deployment:"
+
+#: templates/pages/home.html:102
+msgid ""
+"Containerisierung & Orchestrierung (Docker, Kubernetes), Infrastructure as "
+"Code (IaC), API-Automatisierung und Cloud-Deployment."
+msgstr ""
+"Containerisierung & Orchestrierung (Docker, Kubernetes), Infrastructure as "
+"Code (IaC), API-Automatisierung und Cloud-Deployment."
+
+#: templates/pages/home.html:103
+msgid "Zukunftsaspekte & Skalierung:"
+msgstr "Zukunftsaspekte & Skalierung:"
+
+#: templates/pages/home.html:103
+msgid ""
+"Skript-Entwicklung für spezifische Anwendungsfälle, User-Interface-"
+"Automatisierung und Skalierung robuster Automatisierungslösungen."
+msgstr ""
+"Skript-Entwicklung für spezifische Anwendungsfälle, User-Interface-"
+"Automatisierung und Skalierung robuster Automatisierungslösungen."
+
+#: templates/pages/home.html:133
+msgid "Enterprise Architecture & Integration"
+msgstr "Enterprise Architecture & Integration"
+
+#: templates/pages/home.html:138
+msgid ""
+"Definition und Beschleunigung von Lösungen zur Integration von "
+"Geschäftsprozessen über diverse Applikationen und Plattformen."
+msgstr ""
+"Definition und Beschleunigung von Lösungen zur Integration von "
+"Geschäftsprozessen über diverse Applikationen und Plattformen."
+
+#: templates/pages/home.html:139
+msgid ""
+"Standardisierung von Integrationslösungen sowie Sicherstellung der "
+"Zukunftsfähigkeit in der Unternehmensarchitektur."
+msgstr ""
+"Standardisierung von Integrationslösungen sowie Sicherstellung der "
+"Zukunftsfähigkeit in der Unternehmensarchitektur."
+
+#: templates/pages/home.html:140
+msgid ""
+"Design, Implementierung, Dokumentation und Monitoring von "
+"Integrationsszenarien und Schnittstellen."
+msgstr ""
+"Design, Implementierung, Dokumentation und Monitoring von "
+"Integrationsszenarien und Schnittstellen."
+
+#: templates/pages/home.html:141
+msgid ""
+"Mitarbeit in (Teil-)Projekten und Teilverantwortung bei der Erstellung von "
+"Fach- und IT-Konzepten."
+msgstr ""
+"Mitarbeit in (Teil-)Projekten und Teilverantwortung bei der Erstellung von "
+"Fach- und IT-Konzepten."
+
+#: templates/pages/home.html:142
+msgid ""
+"Steuerung externer Dienstleister und Entwickler sowie operative "
+"Sicherstellung des einwandfreien Softwarebetriebs."
+msgstr ""
+"Steuerung externer Dienstleister und Entwickler sowie operative "
+"Sicherstellung des einwandfreien Softwarebetriebs."
+
+#: templates/pages/home.html:167
+msgid "Softwareentwickler ERP-Systeme"
+msgstr "Softwareentwickler ERP-Systeme"
+
+#: templates/pages/home.html:171
+msgid "Python & ERP-Entwicklung"
+msgstr "Python & ERP-Entwicklung"
+
+#: templates/pages/home.html:176
+msgid ""
+"Konzeption und Realisierung von neuen Funktionalitäten für das Python-"
+"basierte ERP-System Odoo."
+msgstr ""
+"Konzeption und Realisierung von neuen Funktionalitäten für das Python-"
+"basierte ERP-System Odoo."
+
+#: templates/pages/home.html:177
+msgid ""
+"Erarbeitung von maßgeschneiderten Lösungskonzepten für betriebliche "
+"Kundenanforderungen."
+msgstr ""
+"Erarbeitung von maßgeschneiderten Lösungskonzepten für betriebliche "
+"Kundenanforderungen."
+
+#: templates/pages/home.html:178
+msgid ""
+"Administration von Kundensystemen basierend auf Linux, Weiterentwicklung, "
+"Customizing und Wartung von Odoo als Softwareentwickler."
+msgstr ""
+"Administration von Kundensystemen basierend auf Linux, Weiterentwicklung, "
+"Customizing und Wartung von Odoo als Softwareentwickler."
+
+#: templates/pages/home.html:198
+msgid "Kompetenzen"
+msgstr "Kompetenzen"
+
+#: templates/pages/home.html:200
+msgid "Tech Stack & Kenntnisse"
+msgstr "Tech Stack & Kenntnisse"
+
+#: templates/pages/home.html:201
+msgid ""
+"Fundierte Kenntnisse aus Berufspraxis, Projekten und fundierter "
+"Weiterbildung."
+msgstr ""
+"Fundierte Kenntnisse aus Berufspraxis, Projekten und fundierter "
+"Weiterbildung."
+
+#: templates/pages/home.html:212
+msgid "Backend & ERP"
+msgstr "Backend & ERP"
+
+#: templates/pages/home.html:213
+msgid "Robuste Webservices, Schnittstellen & Business-Logik."
+msgstr "Robuste Webservices, Schnittstellen & Business-Logik."
+
+#: templates/pages/home.html:230
+msgid "Automatisierung & Cloud"
+msgstr "Automatisierung & Cloud"
+
+#: templates/pages/home.html:231
+msgid "Effiziente Deployments & Skript-Automatisierung."
+msgstr "Effiziente Deployments & Skript-Automatisierung."
+
+#: templates/pages/home.html:248
+msgid "Software Engineering"
+msgstr "Software Engineering"
+
+#: templates/pages/home.html:249
+msgid "Architekturmuster & Qualitätsstandards."
+msgstr "Architekturmuster & Qualitätsstandards."
+
+#: templates/pages/home.html:266
+msgid "Tools & Sprachen"
+msgstr "Tools & Sprachen"
+
+#: templates/pages/home.html:267
+msgid "Entwicklungsumgebung & Sprachkenntnisse."
+msgstr "Entwicklungsumgebung & Sprachkenntnisse."
+
+#: templates/pages/home.html:271
+msgid "Deutsch (Muttersprache)"
+msgstr "Deutsch (Muttersprache)"
+
+#: templates/pages/home.html:272
+msgid "Englisch (Sehr gute Kenntnisse)"
+msgstr "Englisch (Sehr gute Kenntnisse)"
+
+#: templates/pages/home.html:273
+msgid "Französisch (Gut) / Italienisch (Basic)"
+msgstr "Französisch (Gut) / Italienisch (Basic)"
+
+#: templates/pages/home.html:285
+msgid "Fundament"
+msgstr "Fundament"
+
+#: templates/pages/home.html:287
+msgid "Ausbildung & Akademischer Hintergrund"
+msgstr "Ausbildung & Akademischer Hintergrund"
+
+#: templates/pages/home.html:288
+msgid "Fundierte theoretische und praktische IT-Ausbildung."
+msgstr "Fundierte theoretische und praktische IT-Ausbildung."
+
+#: templates/pages/home.html:296
+msgid "Ausbildung zum Fachinformatiker Anwendungsentwicklung"
+msgstr "Ausbildung zum Fachinformatiker Anwendungsentwicklung"
+
+#: templates/pages/home.html:298
+msgid ""
+"Praxisorientierte Softwareentwicklung, Konzeption, Testen und Deployment "
+"moderner IT-Lösungen."
+msgstr ""
+"Praxisorientierte Softwareentwicklung, Konzeption, Testen und Deployment "
+"moderner IT-Lösungen."
+
+#: templates/pages/home.html:306
+msgid ""
+"Schwerpunkte in Software Engineering, Datenbanken, Algorithmen und "
+"Geschäftsprozessmodellierung."
+msgstr ""
+"Schwerpunkte in Software Engineering, Datenbanken, Algorithmen und "
+"Geschäftsprozessmodellierung."
+
+#: templates/pages/home.html:312
+msgid "Fachhochschulreife"
+msgstr "Fachhochschulreife"
+
+#: templates/pages/home.html:314
+msgid "Kaufmännische Grundlagen und vertiefte Fremdsprachenausbildung."
+msgstr "Kaufmännische Grundlagen und vertiefte Fremdsprachenausbildung."
+
+#: templates/pages/home.html:320
+msgid "Ausbildung zum IT-Systemelektroniker"
+msgstr "Ausbildung zum IT-Systemelektroniker"
+
+#: templates/pages/home.html:322
+msgid ""
+"Fundierte Grundlagen in Netzwerktechnik, IT-Infrastruktur, "
+"Übertragungstechnik und Hardware."
+msgstr ""
+"Fundierte Grundlagen in Netzwerktechnik, IT-Infrastruktur, "
+"Übertragungstechnik und Hardware."
+
+#: templates/pages/home.html:333
+msgid "Portfolio"
+msgstr "Portfolio"
+
+#: templates/pages/home.html:335
+msgid "Featured Projects"
+msgstr "Featured Projects"
+
+#: templates/pages/home.html:336
+msgid "Ausgewählte Open-Source- und Praxisprojekte."
+msgstr "Ausgewählte Open-Source- und Praxisprojekte."
+
+#: templates/pages/home.html:339
+msgid "Alle Projekte anzeigen"
+msgstr "Alle Projekte anzeigen"
+
+#: templates/pages/home.html:362 templates/projects/project_list.html:119
+msgid "Keine Beschreibung verfügbar."
+msgstr "Keine Beschreibung verfügbar."
+
+#: templates/pages/home.html:378 templates/projects/project_detail.html:100
+#: templates/projects/project_list.html:138
+msgid "Sterne"
+msgstr "Sterne"
+
+#: templates/pages/home.html:381 templates/projects/project_detail.html:104
+#: templates/projects/project_list.html:141
+msgid "Forks"
+msgstr "Forks"
+
+#: templates/pages/home.html:389 templates/projects/project_detail.html:55
+#: templates/projects/project_list.html:149
+msgid "Live Demo"
+msgstr "Live Demo"
+
+#: templates/pages/home.html:402
+msgid "Aktuell sind noch keine Projekte vorhanden."
+msgstr "Aktuell sind noch keine Projekte vorhanden."
+
+#: templates/pages/home.html:403
+msgid ""
+"Führe `python manage.py sync_projects` aus, um GitHub-Repos zu "
+"synchronisieren."
+msgstr ""
+"Führe `python manage.py sync_projects` aus, um GitHub-Repos zu "
+"synchronisieren."
+
+#: templates/projects/project_detail.html:19
+msgid "Zurück zur Übersicht"
+msgstr "Zurück zur Übersicht"
+
+#: templates/projects/project_detail.html:74
+msgid "Beschreibung"
+msgstr "Beschreibung"
+
+#: templates/projects/project_detail.html:76
+msgid "Keine nähere Beschreibung angegeben."
+msgstr "Keine nähere Beschreibung angegeben."
+
+#: templates/projects/project_detail.html:83
+msgid "Themen & Tags"
+msgstr "Themen & Tags"
+
+#: templates/projects/project_detail.html:108
+msgid "Letzter Push"
+msgstr "Letzter Push"
+
+#: templates/projects/project_detail.html:118
+msgid "Status"
+msgstr "Status"
+
+#: templates/projects/project_detail.html:120
+msgid "Aktiv"
+msgstr "Aktiv"
+
+#: templates/projects/project_list.html:16
+msgid "Open Source & Praxisprojekte"
+msgstr "Open Source & Praxisprojekte"
+
+#: templates/projects/project_list.html:18
+msgid ""
+"Eine Übersicht aller synchronisierten Repositories. Nutze die Suche und "
+"Filter, um nach Sprachen und Topics zu filtern."
+msgstr ""
+"Eine Übersicht aller synchronisierten Repositories. Nutze die Suche und "
+"Filter, um nach Sprachen und Topics zu filtern."
+
+#: templates/projects/project_list.html:30
+msgid "Projekte suchen (Name, Beschreibung, Tags)..."
+msgstr "Projekte suchen (Name, Beschreibung, Tags)..."
+
+#: templates/projects/project_list.html:48
+msgid "Meiste Sterne"
+msgstr "Meiste Sterne"
+
+#: templates/projects/project_list.html:49
+msgid "Zuletzt aktualisiert"
+msgstr "Zuletzt aktualisiert"
+
+#: templates/projects/project_list.html:50
+msgid "Alphabetisch"
+msgstr "Alphabetisch"
+
+#: templates/projects/project_list.html:57
+msgid "Suchen"
+msgstr "Suchen"
+
+#: templates/projects/project_list.html:65
+#: templates/projects/project_list.html:89
+msgid "Sprache:"
+msgstr "Sprache:"
+
+#: templates/projects/project_list.html:70
+msgid "Alle"
+msgstr "Alle"
+
+#: templates/projects/project_list.html:87
+msgid "Aktive Filter:"
+msgstr "Aktive Filter:"
+
+#: templates/projects/project_list.html:88
+msgid "Suche:"
+msgstr "Suche:"
+
+#: templates/projects/project_list.html:90
+msgid "Topic:"
+msgstr "Topic:"
+
+#: templates/projects/project_list.html:93
+msgid "Filter zurücksetzen"
+msgstr "Filter zurücksetzen"
+
+#: templates/projects/project_list.html:169
+msgid "Zurück"
+msgstr "Zurück"
+
+#: templates/projects/project_list.html:174
+#, python-format
+msgid "Seite %(current)s von %(total)s"
+msgstr "Seite %(current)s von %(total)s"
+
+#: templates/projects/project_list.html:184
+msgid "Weiter"
+msgstr "Weiter"
+
+#: templates/projects/project_list.html:192
+msgid "Keine passenden Projekte gefunden."
+msgstr "Keine passenden Projekte gefunden."
+
+#: templates/projects/project_list.html:193
+msgid "Passe deine Suchbegriffe oder Filter an."
+msgstr "Passe deine Suchbegriffe oder Filter an."
+
+#: templates/projects/project_list.html:196
+msgid "Alle Filter zurücksetzen"
+msgstr "Alle Filter zurücksetzen"

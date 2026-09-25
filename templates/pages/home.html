@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Jochen Hoffmann — Software Engineer & Python Developer{% endblock %}
+{% block title %}Jochen Hoffmann — Software Developer & EAI Specialist{% endblock %}
 
 {% block content %}
 <div class="space-y-24 py-6">
@@ -10,26 +11,31 @@
         <div class="space-y-6 max-w-2xl">
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                Software Engineer & Python Developer
+                {% trans "Software Developer & EAI Specialist" %}
             </div>
 
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-                Building scalable web apps & robust backend systems.
+                {% trans "Backend-Entwicklung, System-Integration & IT-Automatisierung." %}
             </h1>
 
             <p class="text-lg text-gray-400 leading-relaxed">
-                Hi, ich bin <span class="text-white font-semibold">Jochen</span>. Leidenschaftlicher Entwickler mit Fokus auf modernes Python, saubere Django-Architekturen und performante Weblösungen.
+                {% blocktranslate trimmed %}
+                    Hi, ich bin <span class="text-white font-semibold">Jochen</span>. Softwareentwickler mit fundierter Praxis in modernem Python, Enterprise Application Integration (EAI), ERP-Systemen (Odoo) und zeitgemäßer IT- & Cloud-Automatisierung.
+                {% endblocktranslate %}
             </p>
 
             <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2">
-                <a href="#featured-projects" class="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium shadow-lg shadow-indigo-500/25 transition">
-                    Featured Projects
+                <a href="#experience" class="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium shadow-lg shadow-indigo-500/25 transition">
+                    {% trans "Werdegang ansehen" %}
                 </a>
-                <a href="https://github.com/jchnhffmnn90" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-200 font-medium border border-gray-700 transition flex items-center gap-2">
+                <a href="#skills" class="px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-200 font-medium border border-gray-700 transition">
+                    {% trans "Skills & Tech Stack" %}
+                </a>
+                <a href="https://github.com/jchnhffmnn90" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-lg bg-gray-900 hover:bg-gray-800 text-gray-300 font-medium border border-gray-800 transition flex items-center gap-2">
                     <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                     </svg>
-                    GitHub Profil
+                    <span>GitHub</span>
                 </a>
             </div>
         </div>
@@ -42,86 +48,295 @@
                 </div>
                 <div>
                     <h3 class="font-semibold text-white">Jochen Hoffmann</h3>
-                    <p class="text-xs text-gray-400">Mainz / Frankfurt, Germany</p>
+                    <p class="text-xs text-gray-400">{% trans "Ulm, Deutschland" %}</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-2 gap-3 pt-2 border-t border-gray-800">
                 <div class="bg-gray-950/50 p-3 rounded-lg border border-gray-800/80">
-                    <span class="text-xs text-gray-400">Projekte</span>
+                    <span class="text-xs text-gray-400">{% trans "Projekte" %}</span>
                     <p class="text-2xl font-bold text-white mt-0.5">{{ total_projects_count }}</p>
                 </div>
                 <div class="bg-gray-950/50 p-3 rounded-lg border border-gray-800/80">
-                    <span class="text-xs text-gray-400">Fokus</span>
-                    <p class="text-sm font-semibold text-indigo-400 mt-1">Python & Web</p>
+                    <span class="text-xs text-gray-400">{% trans "Fokus" %}</span>
+                    <p class="text-sm font-semibold text-indigo-400 mt-1">Python, EAI & DevOps</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Work Experience & Further Education Section -->
+    <section id="experience" class="space-y-8 scroll-mt-24">
+        <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-2">
+                {% trans "Erfahrung & Weiterbildung" %}
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">{% trans "Beruflicher Werdegang & Qualifikation" %}</h2>
+            <p class="text-gray-400 text-sm mt-1">{% trans "Stationen in Enterprise Integration, ERP-Entwicklung und moderner IT-Automatisierung." %}</p>
+        </div>
+
+        <div class="relative border-l-2 border-gray-800 ml-4 md:ml-6 space-y-10 pl-6 md:pl-8">
+
+            <!-- Item 1: Weiterbildung onecareer -->
+            <div class="relative group">
+                <!-- Timeline Dot -->
+                <div class="absolute -left-[31px] md:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-emerald-500 border-4 border-gray-950 shadow-sm group-hover:scale-125 transition"></div>
+
+                <div class="bg-gray-900/70 border border-gray-800 hover:border-gray-700 rounded-xl p-6 transition space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-1 font-mono">
+                                08.2026 – 12.2026
+                            </span>
+                            <h3 class="text-lg font-bold text-white">{% trans "Weiterbildung IT Administration & Automation" %}</h3>
+                            <p class="text-sm text-indigo-400 font-medium">onecareer · {% trans "ZFU-geprüft (850 Unterrichtseinheiten)" %}</p>
+                        </div>
+                        <span class="text-xs px-2.5 py-1 rounded-md bg-gray-800 text-gray-300 border border-gray-700 self-start sm:self-center">
+                            {% trans "Zertifizierung & Spezialisierung" %}
+                        </span>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-300 list-disc list-inside">
+                        <li><span class="font-medium text-white">{% trans "System- & Prozessautomatisierung:" %}</span> {% trans "Skriptsprachen & fortgeschrittene Skript-Techniken, Effizienzsteigerung in Betriebsabläufen, Fehlerbehandlung und Sicherheitsaspekte." %}</li>
+                        <li><span class="font-medium text-white">{% trans "Netzwerkautomatisierung & Tools:" %}</span> {% trans "Automatisierung lokaler und netzwerkübergreifender Aufgaben, Versionskontrolle, CI/CD-Pipelines sowie Überwachung & Metriken." %}</li>
+                        <li><span class="font-medium text-white">{% trans "Cloud & modernes Deployment:" %}</span> {% trans "Containerisierung & Orchestrierung (Docker, Kubernetes), Infrastructure as Code (IaC), API-Automatisierung und Cloud-Deployment." %}</li>
+                        <li><span class="font-medium text-white">{% trans "Zukunftsaspekte & Skalierung:" %}</span> {% trans "Skript-Entwicklung für spezifische Anwendungsfälle, User-Interface-Automatisierung und Skalierung robuster Automatisierungslösungen." %}</li>
+                    </ul>
+
+                    <div class="flex flex-wrap gap-1.5 pt-2 border-t border-gray-800/80">
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">Python Scripting</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">Bash</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">CI/CD</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">Docker</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">Kubernetes</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">Infrastructure as Code</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">Monitoring</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2: PERI -->
+            <div class="relative group">
+                <!-- Timeline Dot -->
+                <div class="absolute -left-[31px] md:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 border-4 border-gray-950 shadow-sm group-hover:scale-125 transition"></div>
+
+                <div class="bg-gray-900/70 border border-gray-800 hover:border-gray-700 rounded-xl p-6 transition space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-1 font-mono">
+                                04.2023 – 08.2023
+                            </span>
+                            <h3 class="text-lg font-bold text-white">Enterprise Application Integration Specialist</h3>
+                            <p class="text-sm text-indigo-400 font-medium">PERI · Weißenhorn</p>
+                        </div>
+                        <span class="text-xs px-2.5 py-1 rounded-md bg-gray-800 text-gray-300 border border-gray-700 self-start sm:self-center">
+                            {% trans "Enterprise Architecture & Integration" %}
+                        </span>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-300 list-disc list-inside">
+                        <li>{% trans "Definition und Beschleunigung von Lösungen zur Integration von Geschäftsprozessen über diverse Applikationen und Plattformen." %}</li>
+                        <li>{% trans "Standardisierung von Integrationslösungen sowie Sicherstellung der Zukunftsfähigkeit in der Unternehmensarchitektur." %}</li>
+                        <li>{% trans "Design, Implementierung, Dokumentation und Monitoring von Integrationsszenarien und Schnittstellen." %}</li>
+                        <li>{% trans "Mitarbeit in (Teil-)Projekten und Teilverantwortung bei der Erstellung von Fach- und IT-Konzepten." %}</li>
+                        <li>{% trans "Steuerung externer Dienstleister und Entwickler sowie operative Sicherstellung des einwandfreien Softwarebetriebs." %}</li>
+                    </ul>
+
+                    <div class="flex flex-wrap gap-1.5 pt-2 border-t border-gray-800/80">
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">EAI</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">REST Webservices</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">Red Hat OpenShift</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">JSON / XML</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">BPMN & UML</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">Monitoring</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3: AMETRAS -->
+            <div class="relative group">
+                <!-- Timeline Dot -->
+                <div class="absolute -left-[31px] md:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 border-4 border-gray-950 shadow-sm group-hover:scale-125 transition"></div>
+
+                <div class="bg-gray-900/70 border border-gray-800 hover:border-gray-700 rounded-xl p-6 transition space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-1 font-mono">
+                                08.2022 – 03.2023
+                            </span>
+                            <h3 class="text-lg font-bold text-white">{% trans "Softwareentwickler ERP-Systeme" %}</h3>
+                            <p class="text-sm text-indigo-400 font-medium">AMETRAS intelligence GmbH · Baienfurt</p>
+                        </div>
+                        <span class="text-xs px-2.5 py-1 rounded-md bg-gray-800 text-gray-300 border border-gray-700 self-start sm:self-center">
+                            {% trans "Python & ERP-Entwicklung" %}
+                        </span>
+                    </div>
+
+                    <ul class="space-y-2 text-sm text-gray-300 list-disc list-inside">
+                        <li>{% trans "Konzeption und Realisierung von neuen Funktionalitäten für das Python-basierte ERP-System Odoo." %}</li>
+                        <li>{% trans "Erarbeitung von maßgeschneiderten Lösungskonzepten für betriebliche Kundenanforderungen." %}</li>
+                        <li>{% trans "Administration von Kundensystemen basierend auf Linux, Weiterentwicklung, Customizing und Wartung von Odoo als Softwareentwickler." %}</li>
+                    </ul>
+
+                    <div class="flex flex-wrap gap-1.5 pt-2 border-t border-gray-800/80">
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">Python</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">Odoo ERP</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">PostgreSQL / SQL</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">Linux</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-300 font-mono">GitLab</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <!-- Skills & Tech Stack Section -->
-    <section class="space-y-8">
+    <section id="skills" class="space-y-8 scroll-mt-24">
         <div>
-            <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Tech Stack & Skills</h2>
-            <p class="text-gray-400 text-sm mt-1">Technologien und Werkzeuge, mit denen ich täglich arbeite.</p>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-2">
+                {% trans "Kompetenzen" %}
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">{% trans "Tech Stack & Kenntnisse" %}</h2>
+            <p class="text-gray-400 text-sm mt-1">{% trans "Fundierte Kenntnisse aus Berufspraxis, Projekten und fundierter Weiterbildung." %}</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <!-- Backend -->
-            <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-5 hover:border-gray-700 transition">
-                <h3 class="text-sm font-semibold text-indigo-400 uppercase tracking-wider">Backend</h3>
-                <ul class="mt-3 space-y-2 text-sm text-gray-300">
-                    <li class="flex items-center gap-2"><span>🐍</span> Python 3.12+</li>
-                    <li class="flex items-center gap-2"><span>⚡</span> Django & Django REST</li>
-                    <li class="flex items-center gap-2"><span>🐘</span> PostgreSQL & SQLite</li>
-                    <li class="flex items-center gap-2"><span>🔌</span> REST APIs & Webhooks</li>
-                </ul>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <!-- Card 1: Backend & ERP -->
+            <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-5 hover:border-gray-700 transition flex flex-col justify-between space-y-4">
+                <div>
+                    <div class="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-3 font-mono text-lg">
+                        🐍
+                    </div>
+                    <h3 class="text-sm font-semibold text-white uppercase tracking-wider">{% trans "Backend & ERP" %}</h3>
+                    <p class="text-xs text-gray-400 mt-1 mb-3">{% trans "Robuste Webservices, Schnittstellen & Business-Logik." %}</p>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><span class="text-indigo-400 font-mono">•</span> Python 3 & Django</li>
+                        <li class="flex items-center gap-2"><span class="text-indigo-400 font-mono">•</span> Odoo ERP (Customizing & Module)</li>
+                        <li class="flex items-center gap-2"><span class="text-indigo-400 font-mono">•</span> REST Webservices & APIs</li>
+                        <li class="flex items-center gap-2"><span class="text-indigo-400 font-mono">•</span> SQL, PostgreSQL & SQLite</li>
+                        <li class="flex items-center gap-2"><span class="text-indigo-400 font-mono">•</span> C# & JSON / XML</li>
+                    </ul>
+                </div>
             </div>
 
-            <!-- Frontend -->
-            <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-5 hover:border-gray-700 transition">
-                <h3 class="text-sm font-semibold text-indigo-400 uppercase tracking-wider">Frontend</h3>
-                <ul class="mt-3 space-y-2 text-sm text-gray-300">
-                    <li class="flex items-center gap-2"><span>🎨</span> Tailwind CSS</li>
-                    <li class="flex items-center gap-2"><span>🌐</span> HTML5 & Modern CSS</li>
-                    <li class="flex items-center gap-2"><span>📜</span> JavaScript (ES6+)</li>
-                    <li class="flex items-center gap-2"><span>📱</span> Responsive Design</li>
-                </ul>
+            <!-- Card 2: Automation & DevOps -->
+            <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-5 hover:border-gray-700 transition flex flex-col justify-between space-y-4">
+                <div>
+                    <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-3 font-mono text-lg">
+                        ⚙️
+                    </div>
+                    <h3 class="text-sm font-semibold text-white uppercase tracking-wider">{% trans "Automatisierung & Cloud" %}</h3>
+                    <p class="text-xs text-gray-400 mt-1 mb-3">{% trans "Effiziente Deployments & Skript-Automatisierung." %}</p>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-mono">•</span> Scripting (Python, Bash)</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-mono">•</span> CI/CD Pipelines (GitLab, GitHub)</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-mono">•</span> Docker, Kubernetes & OpenShift</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-mono">•</span> Infrastructure as Code (IaC)</li>
+                        <li class="flex items-center gap-2"><span class="text-emerald-400 font-mono">•</span> Monitoring, Metriken & Debugging</li>
+                    </ul>
+                </div>
             </div>
 
-            <!-- Quality & Testing -->
-            <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-5 hover:border-gray-700 transition">
-                <h3 class="text-sm font-semibold text-indigo-400 uppercase tracking-wider">Testing & Quality</h3>
-                <ul class="mt-3 space-y-2 text-sm text-gray-300">
-                    <li class="flex items-center gap-2"><span>🧪</span> Pytest & Pytest-Django</li>
-                    <li class="flex items-center gap-2"><span>🦀</span> Ruff (Linter & Formatter)</li>
-                    <li class="flex items-center gap-2"><span>🪝</span> Pre-Commit Hooks</li>
-                    <li class="flex items-center gap-2"><span>🔍</span> Type Hints & MyPy</li>
-                </ul>
+            <!-- Card 3: Software Engineering & Methoden -->
+            <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-5 hover:border-gray-700 transition flex flex-col justify-between space-y-4">
+                <div>
+                    <div class="w-10 h-10 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 mb-3 font-mono text-lg">
+                        📐
+                    </div>
+                    <h3 class="text-sm font-semibold text-white uppercase tracking-wider">{% trans "Software Engineering" %}</h3>
+                    <p class="text-xs text-gray-400 mt-1 mb-3">{% trans "Architekturmuster & Qualitätsstandards." %}</p>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><span class="text-sky-400 font-mono">•</span> Clean Code & Design Patterns</li>
+                        <li class="flex items-center gap-2"><span class="text-sky-400 font-mono">•</span> Test Driven Development (TDD)</li>
+                        <li class="flex items-center gap-2"><span class="text-sky-400 font-mono">•</span> OOP & Anwendungsentwicklung</li>
+                        <li class="flex items-center gap-2"><span class="text-sky-400 font-mono">•</span> Requirement Engineering & Konzepte</li>
+                        <li class="flex items-center gap-2"><span class="text-sky-400 font-mono">•</span> UML, BPMN & SCRUM / Agile</li>
+                    </ul>
+                </div>
             </div>
 
-            <!-- DevOps & Tools -->
-            <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-5 hover:border-gray-700 transition">
-                <h3 class="text-sm font-semibold text-indigo-400 uppercase tracking-wider">DevOps & Tools</h3>
-                <ul class="mt-3 space-y-2 text-sm text-gray-300">
-                    <li class="flex items-center gap-2"><span>🐙</span> Git & GitHub Actions</li>
-                    <li class="flex items-center gap-2"><span>🐳</span> Docker & Container</li>
-                    <li class="flex items-center gap-2"><span>🐧</span> Linux Environments</li>
-                    <li class="flex items-center gap-2"><span>⚙️</span> CI/CD Pipelines</li>
-                </ul>
+            <!-- Card 4: Tools & Sprachen -->
+            <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-5 hover:border-gray-700 transition flex flex-col justify-between space-y-4">
+                <div>
+                    <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-3 font-mono text-lg">
+                        🌐
+                    </div>
+                    <h3 class="text-sm font-semibold text-white uppercase tracking-wider">{% trans "Tools & Sprachen" %}</h3>
+                    <p class="text-xs text-gray-400 mt-1 mb-3">{% trans "Entwicklungsumgebung & Sprachkenntnisse." %}</p>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li class="flex items-center gap-2"><span class="text-amber-400 font-mono">•</span> Linux & Windows, Vim, VS Code</li>
+                        <li class="flex items-center gap-2"><span class="text-amber-400 font-mono">•</span> Jira, Confluence, GitLab, Git</li>
+                        <li class="flex items-center gap-2"><span class="text-amber-400 font-mono">•</span> {% trans "Deutsch (Muttersprache)" %}</li>
+                        <li class="flex items-center gap-2"><span class="text-amber-400 font-mono">•</span> {% trans "Englisch (Sehr gute Kenntnisse)" %}</li>
+                        <li class="flex items-center gap-2"><span class="text-amber-400 font-mono">•</span> {% trans "Französisch (Gut) / Italienisch (Basic)" %}</li>
+                    </ul>
+                </div>
             </div>
+
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="space-y-8 scroll-mt-24">
+        <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-2">
+                {% trans "Fundament" %}
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">{% trans "Ausbildung & Akademischer Hintergrund" %}</h2>
+            <p class="text-gray-400 text-sm mt-1">{% trans "Fundierte theoretische und praktische IT-Ausbildung." %}</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Education 1 -->
+            <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-6 space-y-3">
+                <span class="text-xs font-mono text-indigo-400 font-semibold block">09.2019 – 07.2022</span>
+                <h3 class="text-lg font-bold text-white">{% trans "Ausbildung zum Fachinformatiker Anwendungsentwicklung" %}</h3>
+                <p class="text-sm text-gray-300">Scanplus GmbH, Ulm</p>
+                <p class="text-xs text-gray-400">{% trans "Praxisorientierte Softwareentwicklung, Konzeption, Testen und Deployment moderner IT-Lösungen." %}</p>
+            </div>
+
+            <!-- Education 2 -->
+            <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-6 space-y-3">
+                <span class="text-xs font-mono text-indigo-400 font-semibold block">03.2014 – 03.2018</span>
+                <h3 class="text-lg font-bold text-white">Bachelor Wirtschaftsinformatik / Softwaretechnik</h3>
+                <p class="text-sm text-gray-300">Hochschule Esslingen / Hochschule Ulm</p>
+                <p class="text-xs text-gray-400">{% trans "Schwerpunkte in Software Engineering, Datenbanken, Algorithmen und Geschäftsprozessmodellierung." %}</p>
+            </div>
+
+            <!-- Education 3 -->
+            <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-6 space-y-3">
+                <span class="text-xs font-mono text-indigo-400 font-semibold block">09.2012 – 07.2014</span>
+                <h3 class="text-lg font-bold text-white">{% trans "Fachhochschulreife" %}</h3>
+                <p class="text-sm text-gray-300">Kaufmännisches Berufskolleg für Fremdsprachen, Ulm</p>
+                <p class="text-xs text-gray-400">{% trans "Kaufmännische Grundlagen und vertiefte Fremdsprachenausbildung." %}</p>
+            </div>
+
+            <!-- Education 4 -->
+            <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-6 space-y-3">
+                <span class="text-xs font-mono text-indigo-400 font-semibold block">09.2009 – 07.2012</span>
+                <h3 class="text-lg font-bold text-white">{% trans "Ausbildung zum IT-Systemelektroniker" %}</h3>
+                <p class="text-sm text-gray-300">Deutsche Telekom AG, Ulm</p>
+                <p class="text-xs text-gray-400">{% trans "Fundierte Grundlagen in Netzwerktechnik, IT-Infrastruktur, Übertragungstechnik und Hardware." %}</p>
+            </div>
+
         </div>
     </section>
 
     <!-- Featured Projects Section -->
-    <section id="featured-projects" class="space-y-8">
+    <section id="featured-projects" class="space-y-8 scroll-mt-24">
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-                <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Featured Projects</h2>
-                <p class="text-gray-400 text-sm mt-1">Ausgewählte Open-Source- und Praxisprojekte.</p>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-2">
+                    {% trans "Portfolio" %}
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">{% trans "Featured Projects" %}</h2>
+                <p class="text-gray-400 text-sm mt-1">{% trans "Ausgewählte Open-Source- und Praxisprojekte." %}</p>
             </div>
-            <a href="/projects/" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium inline-flex items-center gap-1 transition">
-                Alle Projekte anzeigen &rarr;
+            <a href="{% url 'projects:list' %}" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium inline-flex items-center gap-1 transition">
+                {% trans "Alle Projekte anzeigen" %} &rarr;
             </a>
         </div>
 
@@ -144,7 +359,7 @@
                             </div>
 
                             <p class="text-gray-400 text-sm line-clamp-3 leading-relaxed">
-                                {{ project.description|default:"Keine Beschreibung verfügbar." }}
+                                {{ project.description|default:_("Keine Beschreibung verfügbar.") }}
                             </p>
 
                             {% if project.topics %}
@@ -160,10 +375,10 @@
 
                         <div class="pt-6 mt-6 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-400">
                             <div class="flex items-center gap-3">
-                                <span class="flex items-center gap-1" title="Stars">
+                                <span class="flex items-center gap-1" title="{% trans 'Sterne' %}">
                                     ⭐ {{ project.stars_count }}
                                 </span>
-                                <span class="flex items-center gap-1" title="Forks">
+                                <span class="flex items-center gap-1" title="{% trans 'Forks' %}">
                                     🍴 {{ project.forks_count }}
                                 </span>
                             </div>
@@ -171,7 +386,7 @@
                             <div class="flex items-center gap-3">
                                 {% if project.homepage_url %}
                                     <a href="{{ project.homepage_url }}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">
-                                        Live Demo ↗
+                                        {% trans "Live Demo" %} ↗
                                     </a>
                                 {% endif %}
                                 <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition font-medium">
@@ -184,11 +399,101 @@
             </div>
         {% else %}
             <div class="bg-gray-900/40 border border-dashed border-gray-800 rounded-xl p-12 text-center space-y-3">
-                <p class="text-gray-400 text-sm">Aktuell sind noch keine Projekte vorhanden.</p>
-                <p class="text-xs text-gray-500 font-mono">Führe `python manage.py sync_projects` aus, um GitHub-Repos zu synchronisieren.</p>
+                <p class="text-gray-400 text-sm">{% trans "Aktuell sind noch keine Projekte vorhanden." %}</p>
+                <p class="text-xs text-gray-500 font-mono">{% trans "Führe `python manage.py sync_projects` aus, um GitHub-Repos zu synchronisieren." %}</p>
             </div>
         {% endif %}
     </section>
 
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Hero Section Animations
+        const tl = gsap.timeline();
+
+        tl.from("h1", {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        })
+        .from("h1 + p", {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power3.out"
+        }, "-=0.6")
+        .from("section:first-of-type .flex a", {
+            y: 20,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power2.out"
+        }, "-=0.4")
+        .from("section:first-of-type > div:last-child", {
+            x: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+        }, "-=0.8");
+
+        // Experience Timeline
+        gsap.utils.toArray('#experience .relative.group').forEach((item, i) => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%",
+                },
+                x: -50,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            });
+        });
+
+        // Skills Cards
+        gsap.from('#skills .grid > div', {
+            scrollTrigger: {
+                trigger: '#skills .grid',
+                start: "top 80%",
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out"
+        });
+
+        // Education Cards
+        gsap.from('#education .grid > div', {
+            scrollTrigger: {
+                trigger: '#education .grid',
+                start: "top 80%",
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out"
+        });
+
+        // Project Cards
+        if (document.querySelector('#featured-projects .grid')) {
+            gsap.from('#featured-projects .grid > div', {
+                scrollTrigger: {
+                    trigger: '#featured-projects .grid',
+                    start: "top 80%",
+                },
+                scale: 0.9,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "power3.out"
+            });
+        }
+    });
+</script>
 {% endblock %}
