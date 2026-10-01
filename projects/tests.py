@@ -1,6 +1,8 @@
 import io
 import json
+import urllib.error
 from datetime import UTC, datetime
+from email.message import Message
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -9,7 +11,13 @@ from django.core.management.base import CommandError
 from django.urls import reverse
 
 from projects.models import Project
-from projects.services.github import GitHubClient, GitHubRepo, fetch_user_repositories
+from projects.services.github import (
+    GitHubAPIError,
+    GitHubClient,
+    GitHubRateLimitError,
+    GitHubRepo,
+    fetch_user_repositories,
+)
 from projects.services.sync import sync_projects_from_github
 
 
@@ -271,3 +279,84 @@ def test_fetch_user_repositories_helper():
 
     assert len(repos) == 1
     assert repos[0].name == "repo1"
+
+
+@pytest.mark.django_db
+def test_project_list_view_filter_by_topic(client):
+    Project.objects.create(
+        name="django-starter",
+        topics=["django", "web"],
+        is_visible=True,
+    )
+    Project.objects.create(
+        name="vue-frontend",
+        topics=["vue", "web"],
+        is_visible=True,
+    )
+
+    response = client.get(reverse("projects:list"), {"topic": "django"})
+    assert response.status_code == 200
+    assert len(response.context["projects"]) == 1
+    assert response.context["projects"][0].name == "django-starter"
+    assert "django" in response.context["available_topics"]
+    assert "vue" in response.context["available_topics"]
+
+
+@pytest.mark.django_db
+def test_project_slug_collision_handled():
+    p1 = Project.objects.create(name="Collision-Project", github_url="https://github.com/test/1")
+    p2 = Project.objects.create(name="Collision Project", github_url="https://github.com/test/2")
+
+    assert p1.slug == "collision-project"
+    assert p2.slug == "collision-project-1"
+
+
+def test_github_client_rate_limit_error():
+    client = GitHubClient(username="testuser")
+    mock_error = urllib.error.HTTPError(
+        url="https://api.github.com/users/testuser/repos",
+        code=403,
+        msg="Forbidden",
+        hdrs=Message(),
+        fp=None,
+    )
+
+    with patch("urllib.request.urlopen", side_effect=mock_error):
+        with pytest.raises(GitHubRateLimitError):
+            client.get_user_repos()
+
+
+def test_github_client_api_error():
+    client = GitHubClient(username="testuser")
+    mock_error = urllib.error.HTTPError(
+        url="https://api.github.com/users/testuser/repos",
+        code=500,
+        msg="Internal Server Error",
+        hdrs=Message(),
+        fp=None,
+    )
+
+    with patch("urllib.request.urlopen", side_effect=mock_error):
+        with pytest.raises(GitHubAPIError, match="status 500"):
+            client.get_user_repos()
+
+
+def test_github_client_pagination_multiple_pages():
+    client = GitHubClient(username="testuser")
+    page_1 = [{"name": f"repo-{i}", "fork": False} for i in range(100)]
+    page_2 = [{"name": "repo-100", "fork": False}]
+
+    mock_resp_1 = MagicMock()
+    mock_resp_1.read.return_value = json.dumps(page_1).encode("utf-8")
+    mock_resp_1.__enter__.return_value = mock_resp_1
+
+    mock_resp_2 = MagicMock()
+    mock_resp_2.read.return_value = json.dumps(page_2).encode("utf-8")
+    mock_resp_2.__enter__.return_value = mock_resp_2
+
+    with patch("urllib.request.urlopen", side_effect=[mock_resp_1, mock_resp_2]):
+        repos = client.get_user_repos()
+
+    assert len(repos) == 101
+    assert repos[0].name == "repo-0"
+    assert repos[-1].name == "repo-100"

@@ -8,13 +8,13 @@
 
     <!-- Breadcrumb & Header -->
     <div class="space-y-3">
-        <div class="inline-flex items-center gap-2 text-xs text-gray-400">
+        <div class="inline-flex items-center gap-2 text-xs text-zinc-500 font-mono">
             <a href="{% url 'pages:home' %}" class="hover:text-white transition">Home</a>
             <span>/</span>
             <span class="text-indigo-400">{% trans "Kontakt" %}</span>
         </div>
         <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">{% trans "Kontakt & Anfragen" %}</h1>
-        <p class="text-gray-400 text-base max-w-2xl">
+        <p class="text-zinc-400 text-base max-w-2xl leading-relaxed">
             {% trans "Du hast ein spannendes Projekt, eine Frage zu meinem Tech-Stack oder möchtest dich einfach vernetzen? Schreib mir direkt eine Nachricht." %}
         </p>
     </div>
@@ -23,7 +23,7 @@
     {% if messages %}
         <div class="space-y-3">
             {% for message in messages %}
-                <div class="p-4 rounded-xl text-sm flex items-start gap-3 {% if message.tags == 'success' %}bg-emerald-500/10 border border-emerald-500/30 text-emerald-300{% elif message.tags == 'error' %}bg-rose-500/10 border border-rose-500/30 text-rose-300{% else %}bg-indigo-500/10 border border-indigo-500/30 text-indigo-300{% endif %}">
+                <div class="p-4 rounded-xl text-sm flex items-start gap-3 backdrop-blur-md {% if message.tags == 'success' %}bg-emerald-500/10 border border-emerald-500/30 text-emerald-300{% elif message.tags == 'error' %}bg-rose-500/10 border border-rose-500/30 text-rose-300{% else %}bg-indigo-500/10 border border-indigo-500/30 text-indigo-300{% endif %}">
                     {% if message.tags == 'success' %}
                         <svg class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -42,42 +42,42 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <!-- Info Cards (Left Column) -->
         <div class="lg:col-span-5 space-y-6">
-            <div class="bg-gray-900/70 border border-gray-800 rounded-2xl p-6 shadow-xl space-y-6">
+            <div class="bg-zinc-900/40 border border-white/[0.08] rounded-2xl p-6 sm:p-7 shadow-xl backdrop-blur-xl space-y-6">
                 <div>
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-3">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                         {% trans "Offen für Anfragen & Kooperationen" %}
                     </div>
-                    <h2 class="text-xl font-bold text-white">{% trans "Lass uns sprechen" %}</h2>
-                    <p class="text-gray-400 text-sm mt-2 leading-relaxed">
+                    <h2 class="text-xl font-bold text-white tracking-tight">{% trans "Lass uns sprechen" %}</h2>
+                    <p class="text-zinc-400 text-sm mt-2 leading-relaxed">
                         {% trans "Ich antworte in der Regel innerhalb von 24–48 Stunden." %}
                     </p>
                 </div>
 
-                <div class="space-y-4 pt-2 border-t border-gray-800/80">
+                <div class="space-y-4 pt-2 border-t border-white/5">
                     <!-- Location -->
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-lg bg-gray-800/80 border border-gray-700/60 flex items-center justify-center text-gray-300">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </div>
                         <div>
-                            <span class="text-xs text-gray-500 uppercase tracking-wider block">{% trans "Standort" %}</span>
-                            <span class="text-sm font-medium text-gray-200">{% trans "Ulm, Deutschland" %}</span>
+                            <span class="text-xs text-zinc-500 uppercase tracking-wider block">{% trans "Standort" %}</span>
+                            <span class="text-sm font-medium text-zinc-200">{% trans "Ulm, Deutschland" %}</span>
                         </div>
                     </div>
 
                     <!-- GitHub Profile -->
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-lg bg-gray-800/80 border border-gray-700/60 flex items-center justify-center text-gray-300">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300">
                             <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                             </svg>
                         </div>
                         <div>
-                            <span class="text-xs text-gray-500 uppercase tracking-wider block">GitHub</span>
+                            <span class="text-xs text-zinc-500 uppercase tracking-wider block">GitHub</span>
                             <a href="https://github.com/jchnhffmnn90" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-indigo-400 hover:text-indigo-300 transition">
                                 github.com/jchnhffmnn90 ↗
                             </a>
@@ -87,21 +87,21 @@
             </div>
 
             <!-- Quick Topics Badge Box -->
-            <div class="bg-gray-900/40 border border-gray-800 rounded-xl p-5 space-y-3">
-                <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">{% trans "Themen & Schwerpunkte" %}</span>
+            <div class="bg-zinc-900/30 border border-white/[0.08] rounded-2xl p-5 space-y-3 backdrop-blur-md">
+                <span class="text-xs font-semibold text-zinc-500 uppercase tracking-wider">{% trans "Themen & Schwerpunkte" %}</span>
                 <div class="flex flex-wrap gap-2 text-xs">
-                    <span class="px-2.5 py-1 rounded-md bg-gray-800/80 text-gray-300 border border-gray-700">Python & Django</span>
-                    <span class="px-2.5 py-1 rounded-md bg-gray-800/80 text-gray-300 border border-gray-700">Backend APIs</span>
-                    <span class="px-2.5 py-1 rounded-md bg-gray-800/80 text-gray-300 border border-gray-700">Clean Code & Refactoring</span>
-                    <span class="px-2.5 py-1 rounded-md bg-gray-800/80 text-gray-300 border border-gray-700">DevOps & CI/CD</span>
+                    <span class="px-2.5 py-1 rounded-md bg-zinc-800/40 text-zinc-300 border border-white/5">Python & Django</span>
+                    <span class="px-2.5 py-1 rounded-md bg-zinc-800/40 text-zinc-300 border border-white/5">Backend APIs</span>
+                    <span class="px-2.5 py-1 rounded-md bg-zinc-800/40 text-zinc-300 border border-white/5">Clean Code & Refactoring</span>
+                    <span class="px-2.5 py-1 rounded-md bg-zinc-800/40 text-zinc-300 border border-white/5">DevOps & CI/CD</span>
                 </div>
             </div>
         </div>
 
         <!-- Contact Form (Right Column) -->
-        <div class="lg:col-span-7 bg-gray-900/70 border border-gray-800 rounded-2xl p-6 sm:p-8 shadow-xl">
-            <h2 class="text-xl font-bold text-white mb-2">{% trans "Nachricht senden" %}</h2>
-            <p class="text-sm text-gray-400 mb-6">{% trans "Fülle die Felder aus und ich melde mich zeitnah bei dir." %}</p>
+        <div class="lg:col-span-7 bg-zinc-900/40 border border-white/[0.08] rounded-2xl p-6 sm:p-8 shadow-xl backdrop-blur-xl">
+            <h2 class="text-xl font-bold text-white mb-2 tracking-tight">{% trans "Nachricht senden" %}</h2>
+            <p class="text-sm text-zinc-400 mb-6">{% trans "Fülle die Felder aus und ich melde mich zeitnah bei dir." %}</p>
 
             <form method="POST" action="{% url 'pages:contact' %}" class="space-y-5">
                 {% csrf_token %}
@@ -118,7 +118,7 @@
                 <!-- Name & Email Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="space-y-1.5">
-                        <label for="{{ form.name.id_for_label }}" class="block text-xs font-medium text-gray-300">
+                        <label for="{{ form.name.id_for_label }}" class="block text-xs font-medium text-zinc-300">
                             {% trans "Name" %} <span class="text-indigo-400">*</span>
                         </label>
                         {{ form.name }}
@@ -128,7 +128,7 @@
                     </div>
 
                     <div class="space-y-1.5">
-                        <label for="{{ form.email.id_for_label }}" class="block text-xs font-medium text-gray-300">
+                        <label for="{{ form.email.id_for_label }}" class="block text-xs font-medium text-zinc-300">
                             {% trans "E-Mail" %} <span class="text-indigo-400">*</span>
                         </label>
                         {{ form.email }}
@@ -140,8 +140,8 @@
 
                 <!-- Subject -->
                 <div class="space-y-1.5">
-                    <label for="{{ form.subject.id_for_label }}" class="block text-xs font-medium text-gray-300">
-                        {% trans "Betreff" %} <span class="text-gray-500 text-xs">({% trans "optional" %})</span>
+                    <label for="{{ form.subject.id_for_label }}" class="block text-xs font-medium text-zinc-300">
+                        {% trans "Betreff" %} <span class="text-zinc-500 text-xs">({% trans "optional" %})</span>
                     </label>
                     {{ form.subject }}
                     {% if form.subject.errors %}
@@ -151,7 +151,7 @@
 
                 <!-- Message -->
                 <div class="space-y-1.5">
-                    <label for="{{ form.message.id_for_label }}" class="block text-xs font-medium text-gray-300">
+                    <label for="{{ form.message.id_for_label }}" class="block text-xs font-medium text-zinc-300">
                         {% trans "Nachricht" %} <span class="text-indigo-400">*</span>
                     </label>
                     {{ form.message }}
@@ -163,7 +163,7 @@
                 <div class="pt-2">
                     <button
                         type="submit"
-                        class="w-full sm:w-auto px-7 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium shadow-lg shadow-indigo-500/25 transition inline-flex items-center justify-center gap-2"
+                        class="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/30 transition duration-200 inline-flex items-center justify-center gap-2"
                     >
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />

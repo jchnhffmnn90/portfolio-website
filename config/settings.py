@@ -17,6 +17,8 @@ env = environ.Env(
     ALLOWED_HOSTS=(list, ["127.0.0.1", "localhost"]),
     GITHUB_USERNAME=(str, "jchnhffmnn90"),
     GITHUB_TOKEN=(str, ""),
+    CONTACT_NOTIFICATION_EMAIL=(str, ""),
+    DEFAULT_FROM_EMAIL=(str, "webmaster@localhost"),
 )
 
 # Read .env file if it exists
@@ -25,6 +27,9 @@ environ.Env.read_env(BASE_DIR / ".env")
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
 ALLOWED_HOSTS = env("ALLOWED_HOSTS")
+
+if not DEBUG and SECRET_KEY == "django-insecure-default-change-me":
+    raise ValueError("A secure SECRET_KEY must be configured in environment when DEBUG is False.")
 
 
 # Application definition
@@ -144,3 +149,19 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # GitHub Integration Settings
 GITHUB_USERNAME = env("GITHUB_USERNAME")
 GITHUB_TOKEN = env("GITHUB_TOKEN")
+
+# Email & Notification Settings
+CONTACT_NOTIFICATION_EMAIL = env("CONTACT_NOTIFICATION_EMAIL")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+
+# Production Security Hardening
+if not DEBUG:
+    SECURE_SSL_REDIRECT = env.bool("SECURE_SSL_REDIRECT", default=True)
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = env.int("SECURE_HSTS_SECONDS", default=31536000)
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = "DENY"

@@ -1,4 +1,6 @@
-from django.core.management.base import BaseCommand, CommandError
+from typing import Any
+
+from django.core.management.base import BaseCommand, CommandError, CommandParser
 
 from projects.services.sync import sync_projects_from_github
 
@@ -6,7 +8,7 @@ from projects.services.sync import sync_projects_from_github
 class Command(BaseCommand):
     help = "Sync GitHub repositories into the Project database model."
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: CommandParser) -> None:
         parser.add_argument(
             "--username",
             type=str,
@@ -18,9 +20,9 @@ class Command(BaseCommand):
             help="Include forked repositories.",
         )
 
-    def handle(self, *args, **options):
-        username = options.get("username")
-        include_forks = options.get("include_forks", False)
+    def handle(self, *args: Any, **options: Any) -> None:
+        username: str | None = options.get("username")
+        include_forks: bool = bool(options.get("include_forks", False))
 
         self.stdout.write("Starting GitHub project synchronization...")
 

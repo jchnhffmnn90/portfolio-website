@@ -103,6 +103,26 @@ def test_contact_page_post_success(client):
 
 
 @pytest.mark.django_db
+def test_contact_page_post_sends_notification_when_configured(client, settings):
+    from django.core import mail
+
+    settings.CONTACT_NOTIFICATION_EMAIL = "admin@example.com"
+    data = {
+        "name": "Jane Doe",
+        "email": "jane@example.com",
+        "subject": "Collab",
+        "message": "Let's work together!",
+        "honeypot": "",
+    }
+    response = client.post(reverse("pages:contact"), data=data, follow=True)
+    assert response.status_code == 200
+    assert len(mail.outbox) == 1
+    assert "admin@example.com" in mail.outbox[0].to
+    assert "Collab" in mail.outbox[0].subject
+    assert "Jane Doe" in mail.outbox[0].body
+
+
+@pytest.mark.django_db
 def test_contact_page_post_invalid(client):
     data = {
         "name": "",

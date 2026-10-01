@@ -1,5 +1,6 @@
 from typing import Any
 
+from django.db import connection
 from django.db.models import Q, QuerySet
 from django.views.generic import DetailView, ListView
 
@@ -29,7 +30,11 @@ class ProjectListView(ListView):
 
         topic = self.request.GET.get("topic", "").strip()
         if topic:
-            queryset = queryset.filter(topics__contains=[topic])
+            if connection.vendor == "postgresql":
+                queryset = queryset.filter(topics__contains=[topic])
+            else:
+                sanitized_topic = topic.replace('"', "")
+                queryset = queryset.filter(topics__icontains=f'"{sanitized_topic}"')
 
         sort = self.request.GET.get("sort", "stars").strip()
         if sort == "recent":
@@ -53,10 +58,13 @@ class ProjectListView(ListView):
             .order_by("language")
         )
 
-        all_topics: set[str] = set()
-        for project in all_visible.only("topics"):
-            if isinstance(project.topics, list):
-                all_topics.update(project.topics)
+        all_topics: set[str] = {
+            t
+            for topics_list in all_visible.values_list("topics", flat=True)
+            if isinstance(topics_list, list)
+            for t in topics_list
+            if isinstance(t, str)
+        }
 
         context["available_languages"] = list(languages)
         context["available_topics"] = sorted(all_topics)
